@@ -16,6 +16,6 @@ Windows平台下可视化asar文件编辑工具，支持解包、编辑、打包
 2. 添加“查看完整JSON”功能；
 3. 设置文本框自动换行；微调美化控件位置、大小等；  
 
-![asar打包](./screenshots/asar打包.png)  
+![asar打包](https://github.com/playGitboy/WinAsar/blob/master/screenshots/asar%E6%89%93%E5%8C%85.jpg)  
 
-![asar解包](./screenshots/asar解包.png)
+![asar解包](https://github.com/playGitboy/WinAsar/blob/master/screenshots/asar%E8%A7%A3%E5%8C%85.jpg)
