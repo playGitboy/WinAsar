@@ -3,7 +3,7 @@ import win.ui;
 /*DSG{{*/
 mainForm = win.form(text="WinAsar - asar( electron archive ) utility";right=1019;bottom=679;bgcolor=15793151;border="none")
 mainForm.add(
-caption={cls="bkplus";text="WinAsar增强版 By Playboysen";left=61;top=9;right=261;bottom=27;align="left";color=6052956;dl=1;dt=1;font=LOGFONT(h=-14);z=7};
+caption={cls="bkplus";text="WinAsar增强版";left=61;top=9;right=261;bottom=27;align="left";color=6052956;dl=1;dt=1;font=LOGFONT(h=-14);z=7};
 custom={cls="custom";left=83;top=40;right=1022;bottom=679;bgcolor=16777215;db=1;dl=1;dr=1;dt=1;z=4};
 logo={cls="bkplus";text='\uF0AD';left=29;top=7;right=58;bottom=32;color=5659105;dl=1;dt=1;font=LOGFONT(h=-18;name='FontAwesome');z=6};
 nav1={cls="plus";text="打包";left=0;top=48;right=85;bottom=128;bkBottom=3;bkLeft=7;bkRight=8;bkTop=2;border={color=-65536};color=16777215;dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={font=LOGFONT(h=-37;name='FontAwesome');padding={bottom=20}};iconText='\uF0B1';notify=1;textPadding={bottom=10};valign="bottom";x=0.5;y=0.2;z=3};
