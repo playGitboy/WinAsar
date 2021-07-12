@@ -3,15 +3,16 @@ import fonts.fontAwesome;
 /*DSG{{*/
 var winform = win.form(text="WinAsar - extractor";right=1075;bottom=736;acceptfiles=1;bgcolor=16777215;parent=...)
 winform.add(
-btnExtract={cls="plus";text="Extract";left=805;top=666;right=913;bottom=699;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF093';notify=1;textPadding={left=35};z=3};
-btnOpen={cls="plus";text="Open";left=623;top=4;right=868;bottom=37;align="left";dr=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF115';notify=1;textPadding={left=35};z=6};
-btnReplace={cls="plus";text="Save";left=888;top=4;right=1047;bottom=37;align="left";disabled=1;dr=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF114';textPadding={left=35};z=9};
-editAsarPath={cls="edit";left=19;top=5;right=617;bottom=36;dl=1;dr=1;dt=1;edge=1;multiline=1;z=5};
-editInfo={cls="richedit";left=371;top=42;right=1058;bottom=654;db=1;dl=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=2};
-editOutDir={cls="edit";left=138;top=666;right=800;bottom=699;acceptfiles=1;db=1;dl=1;dr=1;edge=1;multiline=1;z=7};
-progress={cls="plus";left=21;top=710;right=1058;bottom=723;bgcolor=6447459;db=1;dl=1;dr=1;forecolor=9959653;hide=1;max=100;min=0;z=4};
-static={cls="static";text="Copy to:";left=42;top=672;right=128;bottom=696;align="right";db=1;dl=1;font=LOGFONT(h=-15);transparent=1;z=8};
-treeview={cls="treeview";left=18;top=43;right=364;bottom=658;asel=false;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;vscroll=1;z=1}
+btnExtract={cls="plus";text="解包";left=822;top=676;right=1022;bottom=702;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF093';notify=1;textPadding={left=35};z=3};
+btnOpen={cls="plus";text="打开文件...";left=640;top=7;right=840;bottom=33;align="left";dr=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF115';notify=1;textPadding={left=35};z=6};
+btnReplace={cls="plus";text="保存更改";left=856;top=7;right=1056;bottom=33;align="left";disabled=1;dr=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF114';textPadding={left=35};z=9};
+editAsarPath={cls="edit";left=19;top=8;right=629;bottom=32;dl=1;dr=1;dt=1;edge=1;multiline=1;z=5};
+editInfo={cls="richedit";left=286;top=43;right=1056;bottom=658;aw=1;db=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;wrap=1;z=2};
+editOutDir={cls="edit";left=138;top=676;right=800;bottom=702;acceptfiles=1;db=1;dl=1;dr=1;edge=1;multiline=1;z=7};
+progress={cls="plus";left=21;top=710;right=1058;bottom=723;bgcolor=6447459;db=1;dl=1;dr=1;forecolor=9959653;hide=1;z=4};
+splitter1={cls="splitter";left=278;top=43;right=283;bottom=658;db=1;dt=1;frame=1;z=10};
+static={cls="static";text="目录路经:";left=42;top=678;right=128;bottom=702;align="right";db=1;dl=1;font=LOGFONT(h=-15);transparent=1;z=8};
+treeview={cls="treeview";left=18;top=43;right=278;bottom=658;asel=false;aw=1;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;tabstop=1;vscroll=1;z=1}
 )
 /*}}*/
 
@@ -215,7 +216,9 @@ winform.btnReplace.skin({
 	}
 })
 
+winform.splitter1.split(winform.treeview,winform.editInfo);
+
 winform.show();
 
 win.loopMessage();
-return winform; 
+return winform;

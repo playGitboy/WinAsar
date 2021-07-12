@@ -3,22 +3,24 @@ import win.ui;
 /*DSG{{*/
 var winform = win.form(text="WinAsar - packer";right=1075;bottom=734;acceptfiles=1;bgcolor=16777215;parent=...)
 winform.add(
-btnBuild={cls="plus";text="Pack";left=805;top=664;right=910;bottom=701;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF090';notify=1;textPadding={left=35};z=3};
-btnClear={cls="plus";text="Clear";left=272;top=8;right=355;bottom=43;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF1F8';textPadding={left=35};z=8};
-btnOpen={cls="plus";text="Add";left=25;top=8;right=129;bottom=43;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF07C';textPadding={left=35};z=5};
-btnRemove={cls="plus";text="Remove";left=135;top=8;right=239;bottom=43;align="left";disabled=1;dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF08B';textPadding={left=35};z=9};
-editInfo={cls="richedit";left=371;top=8;right=1064;bottom=655;db=1;dl=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=2};
-editOutPath={cls="edit";left=138;top=666;right=800;bottom=699;db=1;dl=1;dr=1;edge=1;multiline=1;z=6};
-lbTip={cls="plus";text="Drag and drop files on this form to add them";left=382;top=706;right=663;bottom=728;align="right";db=1;dr=1;transparent=1;z=11};
-plusWebSite={cls="plus";text="Star";left=975;top=698;right=1052;bottom=729;align="left";color=-1;db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-19;name='FontAwesome');padding={left=15;top=1}};iconText='\uF09B';notify=1;textPadding={left=35;bottom=1};z=10};
-progress={cls="plus";left=21;top=710;right=1058;bottom=723;bgcolor=6447459;db=1;dl=1;dr=1;forecolor=9959653;hide=1;max=100;min=0;z=4};
-static={cls="static";text="Archive:";left=42;top=672;right=128;bottom=696;align="right";db=1;dl=1;font=LOGFONT(h=-15);transparent=1;z=7};
+btnBuild={cls="plus";text="打包";left=814;top=670;right=914;bottom=696;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF090';notify=1;textPadding={left=35};z=3};
+btnClear={cls="plus";text="清空";left=253;top=11;right=363;bottom=37;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF1F8';textPadding={left=35};z=8};
+btnOpen={cls="plus";text="添加...";left=20;top=11;right=130;bottom=37;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF07C';notify=1;textPadding={left=35};z=5};
+btnRemove={cls="plus";text="删除";left=137;top=11;right=247;bottom=37;align="left";disabled=1;dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF08B';textPadding={left=35};z=9};
+btnShow={cls="plus";text="查看JSON";left=927;top=671;right=1060;bottom=697;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF0A6';notify=1;textPadding={left=35};z=12};
+editInfo={cls="richedit";left=371;top=9;right=1059;bottom=656;db=1;dl=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;wrap=1;z=2};
+editOutPath={cls="edit";left=138;top=670;right=800;bottom=696;db=1;dl=1;dr=1;edge=1;multiline=1;z=6};
+lbTip={cls="plus";text="支持批量文件拖放……";left=382;top=703;right=663;bottom=725;dl=0.36;transparent=1;z=11};
+plusWebSite={cls="plus";text="Star";left=886;top=698;right=963;bottom=729;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-19;name='FontAwesome');padding={left=15;top=1}};iconText='\uF09B';notify=1;textPadding={left=35;bottom=1};z=10};
+progress={cls="plus";left=21;top=710;right=1058;bottom=723;bgcolor=6447459;db=1;dl=1;dr=1;forecolor=9959653;hide=1;z=4};
+static={cls="static";text="asar包路经:";left=42;top=672;right=128;bottom=696;align="right";db=1;dl=1;font=LOGFONT(h=-15);transparent=1;z=7};
 treeview={cls="treeview";left=18;top=51;right=364;bottom=658;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;vscroll=1;z=1}
 )
 /*}}*/
 
 import fsys.asar.writer;
 var asarFile = fsys.asar.writer();
+var isCleared = false;
 
 var showAsarInfo = function(){
 	var info,err = asarFile.createInfo(); 
@@ -31,25 +33,64 @@ var showAsarInfo = function(){
 	winform.editInfo.text = web.json.stringify(asarFile.info,true); 
 	
 	if( ( !# ( ..string.trim( winform.editOutPath.text )) )
-		|| (winform.editOutPath.autoPath = winform.editOutPath.text ) ){
+		|| (winform.editOutPath.autoPath = winform.editOutPath.text)){
 		winform.editOutPath.text = fsys.path.removeBackslash(asarFile.rootDirectory) + ".asar";
 		winform.editOutPath.autoPath = winform.editOutPath.text;
 	}
 }
 
+// 原版有BUG，添加A目录文件然后删除或清除后就无法再添加B目录的文件
+// BUG起因就是asarFile是启动时定义，asarFile.rootDirectory已固定，只要程序不关闭则asarFile.rootDirectory不再自动更新
+// 增加该函数自动更新rootDirectory
+var setRootDirectory=function(path){
+	if(!..fsys.isDir(path)){
+		asarFile.rootDirectory = ..fsys.getParentDir(path);
+	}
+	else {
+		asarFile.rootDirectory = path;
+	}
+}
+
+
 winform.btnClear.oncommand = function(id,event){
+    isCleared = true;
 	asarFile.clear();
 	winform.treeview.clear();
 	winform.editInfo.text = "";
+	winform.editOutPath.text="";
+	winform.editOutPath.autoPath="";
 	winform.btnRemove.disabled = true;
+}
+
+winform.btnRemove.oncommand = function(id,event){
+	var hItem = winform.treeview.getSelection();
+	if(hItem){
+		var path = winform.treeview.getItemPath(hItem);
+		if(asarFile.remove(path)){
+			winform.treeview.delItem(hItem)
+		}
+	}
+	// 判断如果列表文件已全部删除，则相当于重置清空
+	if(winform.treeview.getFirst()==null){
+		isCleared = true;
+		asarFile.clear();
+		winform.editInfo.text = "";
+		winform.editOutPath.text="";
+		winform.editOutPath.autoPath="";
+		winform.btnRemove.disabled = true;
+	}
 }
 
 import fsys.dlg;
 winform.btnOpen.oncommand = function(id,event){
 	var path = fsys.dlg.open("*.*|*.*||","Browse",,winform.hwnd);
 	if(#path){
+		if(isCleared){
+			setRootDirectory(path);
+		}
 		asarFile.add( path );
 		showAsarInfo();
+		isCleared = false;
 	} 
 }
 
@@ -57,11 +98,17 @@ winform.wndproc = {
     [0x233/*_WM_DROPFILES*/] = function(hwnd,message,wParam,lParam){ 
 		var files = win.getDropFile(wParam)
 		if(#files){
+			// 注意索引号从1开始
+			// 点击重置清空后才可以选择其他目录文件
+			if(isCleared){
+				setRootDirectory(files[1]);
+			}
 			for(i=1;#files;1){
 				asarFile.add( files[i] );
 			}
 			
 			showAsarInfo();
+			isCleared = false;
 		};
 	}
 }
@@ -121,16 +168,6 @@ winform.btnBuild.oncommand = function(id,event){
 	process.explore_select(outpath)
 }
 
-winform.btnRemove.oncommand = function(id,event){
-	var hItem = winform.treeview.getSelection();
-	if(hItem){
-		var path = winform.treeview.getItemPath(hItem);
-		if(asarFile.remove(path)){
-			winform.treeview.delItem(hItem)
-		}
-	}	
-}
-
 winform.btnClear.skin({
 	background={
 		default=0xFF8FB2B0;
@@ -171,7 +208,20 @@ winform.plusWebSite.skin(
 )
 winform.plusWebSite.oncommand = function(id,event){
 	import process
-	process.openUrl("https://github.com/aardio/WinAsar")
+	process.openUrl("https://github.com/playGitboy/WinAsar")
+}
+
+winform.btnShow.skin(
+	background = { 
+		hover = "/res/images/btn-hover.png";
+		focus = "/res/images/btn-focus.jpg";
+		active = "/res/images/btn-active.png";
+		disabled = "/res/images/btn-disabled.png"; 
+	}
+)
+winform.btnShow.oncommand = function(id,event){
+    winform.treeview.setSelected();
+	winform.editInfo.text = web.json.stringify(asarFile.info,true); 
 }
 
 winform.enableDpiScaling();
