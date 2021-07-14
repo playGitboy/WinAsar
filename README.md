@@ -1,5 +1,5 @@
 # WinAsar增强版  
-### asar editor 或者 asar manager  
+### asar editor或asar manager  
 
 Windows平台下可视化asar文件编辑工具，支持解包、编辑、打包等功能。
 
