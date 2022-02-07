@@ -1,19 +1,20 @@
 import fonts.fontAwesome;
 import win.ui;
+import process;
 /*DSG{{*/
 var winform = win.form(text="WinAsar - packer";right=1075;bottom=734;acceptfiles=1;bgcolor=16777215;parent=...)
 winform.add(
-btnBuild={cls="plus";text="打包";left=814;top=670;right=914;bottom=696;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF090';notify=1;textPadding={left=35};z=3};
-btnClear={cls="plus";text="清空";left=253;top=11;right=363;bottom=37;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF1F8';textPadding={left=35};z=8};
-btnOpen={cls="plus";text="添加...";left=20;top=11;right=130;bottom=37;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF07C';notify=1;textPadding={left=35};z=5};
-btnRemove={cls="plus";text="删除";left=137;top=11;right=247;bottom=37;align="left";disabled=1;dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF08B';textPadding={left=35};z=9};
-btnShow={cls="plus";text="查看JSON";left=927;top=671;right=1060;bottom=697;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF0A6';notify=1;textPadding={left=35};z=12};
+btnBuild={cls="plus";text="打包...";left=814;top=670;right=934;bottom=696;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF090';notify=1;textPadding={left=35};z=3};
+btnClear={cls="plus";text="清空";left=257;top=11;right=363;bottom=37;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF1F8';textPadding={left=35};z=8};
+btnOpen={cls="plus";text="添加...";left=18;top=11;right=128;bottom=37;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF07C';notify=1;textPadding={left=35};z=5};
+btnRemove={cls="plus";text="删除";left=138;top=11;right=247;bottom=37;align="left";disabled=1;dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF08B';textPadding={left=35};z=9};
+btnShow={cls="plus";text="查看JSON";left=939;top=670;right=1059;bottom=696;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(name='FontAwesome');padding={left=15}};iconText='\uF0A6';notify=1;textPadding={left=35};z=12};
 editInfo={cls="richedit";left=371;top=9;right=1059;bottom=656;db=1;dl=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;wrap=1;z=2};
-editOutPath={cls="edit";left=138;top=670;right=800;bottom=696;db=1;dl=1;dr=1;edge=1;multiline=1;z=6};
-lbTip={cls="plus";text="支持批量文件拖放……";left=382;top=703;right=663;bottom=725;dl=0.36;transparent=1;z=11};
-plusWebSite={cls="plus";text="Star";left=886;top=698;right=963;bottom=729;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-19;name='FontAwesome');padding={left=15;top=1}};iconText='\uF09B';notify=1;textPadding={left=35;bottom=1};z=10};
+editOutPath={cls="edit";left=116;top=670;right=800;bottom=696;db=1;dl=1;dr=1;edge=1;multiline=1;z=6};
+lbTip={cls="plus";text="支持批量文件拖放……          ";left=382;top=703;right=663;bottom=725;dl=0.36;transparent=1;z=11};
+plusWebSite={cls="plus";text="Star";left=886;top=700;right=963;bottom=731;align="left";db=1;dr=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-19;name='FontAwesome');padding={left=15;top=1}};iconText='\uF09B';notify=1;textPadding={left=35;bottom=1};z=10};
 progress={cls="plus";left=21;top=710;right=1058;bottom=723;bgcolor=6447459;db=1;dl=1;dr=1;forecolor=9959653;hide=1;z=4};
-static={cls="static";text="asar包路经:";left=42;top=672;right=128;bottom=696;align="right";db=1;dl=1;font=LOGFONT(h=-15);transparent=1;z=7};
+static={cls="static";text="asar包路经：";left=18;top=672;right=113;bottom=696;db=1;dl=1;font=LOGFONT(h=-15);transparent=1;z=7};
 treeview={cls="treeview";left=18;top=51;right=364;bottom=658;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;vscroll=1;z=1}
 )
 /*}}*/
@@ -115,9 +116,7 @@ winform.wndproc = {
 
 import fsys;
 import win.ui.menu;
-import process;
 winform.treeview.onnotify = function(id,code,ptr){
- 
     if( code == 0xFFFFFE3D/*_TVN_SELCHANGEDW*/ ){  
 		var hItem = winform.treeview.getSelection();
 		if(hItem){
@@ -138,7 +137,6 @@ winform.treeview.onnotify = function(id,code,ptr){
 }
 
 import fsys.dlg;
-import process;
 winform.btnBuild.oncommand = function(id,event){
 	var outpath = winform.editOutPath.text;
 	if(!#outpath){
@@ -207,21 +205,22 @@ winform.plusWebSite.skin(
     }
 )
 winform.plusWebSite.oncommand = function(id,event){
-	import process
 	process.openUrl("https://github.com/playGitboy/WinAsar")
 }
 
-winform.btnShow.skin(
-	background = { 
-		hover = "/res/images/btn-hover.png";
-		focus = "/res/images/btn-focus.jpg";
-		active = "/res/images/btn-active.png";
-		disabled = "/res/images/btn-disabled.png"; 
+winform.btnShow.skin({
+	background={
+		default=0xFF8FB2B0;
+		hover=0xFF928BB3;
+		disabled=0xFFCCCCCC;
 	}
-)
+})
+
 winform.btnShow.oncommand = function(id,event){
-    winform.treeview.setSelected();
-	winform.editInfo.text = web.json.stringify(asarFile.info,true); 
+	if(winform.treeview.count>0){
+	    winform.treeview.setSelected();
+		winform.editInfo.text = web.json.stringify(asarFile.info,true); 
+	}
 }
 
 winform.enableDpiScaling();

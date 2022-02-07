@@ -38,8 +38,7 @@ tbs.skin({
 })
  
 tbs.loadForm(1,"\forms\packer.aardio");
-tbs.loadForm(2,"\forms\extractor.aardio" );
-
+tbs.loadForm(2,"\forms\extractor.aardio");
 tbs.selIndex = 1;
 
 mainForm.show();
